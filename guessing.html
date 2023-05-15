@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Guessing Game</title>
+  <style>
+    #result {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Number Guessing Game</h1>
+  <p>Guess a number between 1 and 100:</p>
+  <input type="number" id="guessInput">
+  <button onclick="checkGuess()">Submit</button>
+  <p id="result"></p>
+
+  <script>
+    var randomNumber = Math.floor(Math.random() * 100) + 1;
+    var guessCount = 0;
+
+    function checkGuess() {
+      var guess = parseInt(document.getElementById("guessInput").value);
+      var result = document.getElementById("result");
+
+      if (isNaN(guess) || guess < 1 || guess > 100) {
+        result.textContent = "Invalid guess. Please enter a number between 1 and 100.";
+        return;
+      }
+
+      guessCount++;
+
+      if (guess === randomNumber) {
+        result.textContent = "Congratulations! You guessed the correct number in " + guessCount + " tries.";
+        disableInputAndButton();
+      } else if (guess < randomNumber) {
+        result.textContent = "Too low. Try again!";
+      } else {
+        result.textContent = "Too high. Try again!";
+      }
+    }
+
+    function disableInputAndButton() {
+      var input = document.getElementById("guessInput");
+      var button = document.querySelector("button");
+      input.disabled = true;
+      button.disabled = true;
+    }
+  </script>
+</body>
+</html>
